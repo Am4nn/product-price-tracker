@@ -1,0 +1,33 @@
+# Default parser hint if domain unknown: "flipkart" or "amazon"
+defaults:
+  user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+
+products:
+  - id: "fk_16pro_128_natural"
+    name: "iPhone 16 Pro 128GB Natural Titanium (Flipkart)"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-natural-titanium-128-gb/p/itm4397c54ec56b7"
+    domain: "flipkart"
+    target_price: 80000
+    notify_if_in_stock: true
+    check_price: true
+  - id: "fk_16pro_128_black"
+    name: "iPhone 16 Pro 128GB Black Titanium (Flipkart)"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-black-titanium-128-gb/p/itm12f97adb4c5ed"
+    domain: "flipkart"
+    target_price: 80000
+    notify_if_in_stock: true
+    check_price: true
+  - id: "fk_16pro_128_desert"
+    name: "iPhone 16 Pro 128GB Desert Titanium (Flipkart)"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-desert-titanium-128-gb/p/itm5a8453e89cbd4"
+    domain: "flipkart"
+    target_price: 80000
+    notify_if_in_stock: true
+    check_price: true
+  - id: "fk_16pro_128_white"
+    name: "iPhone 16 Pro 128GB White Titanium (Flipkart)"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-white-titanium-128-gb/p/itm50f720fdcec51"
+    domain: "flipkart"
+    target_price: 80000
+    notify_if_in_stock: true
+    check_price: true
