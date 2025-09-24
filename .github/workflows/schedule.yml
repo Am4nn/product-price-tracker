@@ -1,21 +1,28 @@
-name: scheduled-price-check
+name: Price Tracker
 on:
   schedule:
-    - cron: '*/15 * * * *'
-  workflow_dispatch:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:         # allow manual run from GitHub UI
 
 jobs:
-  check:
+  run-tracker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
+
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r tracker/requirements.txt
+        run: pip install -r tracker/requirements.txt
+
       - name: Run tracker
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python3 tracker/tracker.py
