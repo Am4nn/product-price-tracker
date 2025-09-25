@@ -1,28 +1,28 @@
-# name: Price Tracker
-# on:
-#   schedule:
-#     - cron: "*/15 * * * *"   # every 15 minutes
-#   workflow_dispatch:         # allow manual run from GitHub UI
+name: Price Tracker
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:         # allow manual run from GitHub UI
 
-# jobs:
-#   run-tracker:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repo
-#         uses: actions/checkout@v4
+jobs:
+  run-tracker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-#       - name: Set up Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: "3.11"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-#       - name: Install dependencies
-#         run: pip install -r tracker/requirements.txt
+      - name: Install dependencies
+        run: pip install -r tracker/requirements.txt
 
-#       - name: Run tracker
-#         env:
-#           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-#           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-#           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-#           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-#         run: python3 tracker/tracker.py
+      - name: Run tracker
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python3 tracker/tracker.py
