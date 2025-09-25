@@ -1,21 +1,16 @@
-import sys
 import yaml
 import logging
-from tenacity import retry, stop_after_attempt, wait_exponential
-from parsers import parse_flipkart, parse_amazon, parse_generic
-from urllib.parse import urlparse
 import asyncio
-from telegram import Bot
-from supabase_utils import insert_product, log_price
-from mimic_browser import mimic_browser_get
-from dotenv import load_dotenv
-load_dotenv()
-import os
+from urllib.parse import urlparse
+from tenacity import retry, stop_after_attempt, wait_exponential
+from utils.parsers import parse_flipkart, parse_amazon, parse_generic
+from utils.telegram_utils import send_image_to_telegram, send_telegram
+from utils.supabase_utils import insert_product, log_price
+from utils.mimic_browser import mimic_browser_get
+from utils.env_utils import check_required_envs
+from utils.screenshot_utils import html_to_image
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 def load_config(path="./config/config.yml"):
     with open(path, "r") as f:
@@ -33,16 +28,9 @@ def fetch(url):
     resp = mimic_browser_get(url)
     return resp.text
 
-async def send_telegram(bot_token, chat_id, message):
-    bot = Bot(token=bot_token)
-    async with bot:
-      await bot.send_message(chat_id=chat_id, text=message, parse_mode="HTML", disable_web_page_preview=False)
-
-def main():
+async def main():
     cfg = load_config()
-    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        logging.error("Telegram token/chat_id not set")
-        sys.exit(1)
+    check_required_envs(["SUPABASE_URL", "SUPABASE_KEY", "TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID"])
 
     for p in cfg.get("products", []):
         pid = p["id"]
@@ -63,6 +51,15 @@ def main():
         in_stock = parsed.get("in_stock", False)
         title = parsed.get("title") or name
 
+        # If no price found and out of stock, then send screenshot for manual check
+        # if price is None:
+        #     try:
+        #         image_bytes = html_to_image(html)
+        #         await send_image_to_telegram(image_bytes, caption=f"Check {title}\n{url}")
+        #         logging.info("Sent screenshot for manual check for %s", pid)
+        #     except Exception:
+        #         logging.exception("Failed to send screenshot for %s", pid)
+
         # Always notify if price <= target or in stock
         notify_messages = []
         target = p.get("target_price")
@@ -73,7 +70,7 @@ def main():
 
         if notify_messages:
             try:
-                asyncio.run(send_telegram(TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, "\n\n".join(notify_messages)))
+                await send_telegram("\n\n".join(notify_messages))
                 logging.info("Sent alert for %s", pid)
             except Exception:
                 logging.exception("Failed to send telegram")
@@ -84,4 +81,4 @@ def main():
         log_price(pid, price, in_stock)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

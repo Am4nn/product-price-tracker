@@ -1,10 +1,8 @@
-from dotenv import load_dotenv
-load_dotenv()  # loads .env variables
-import os
 from supabase import create_client, Client
+from utils.env_utils import get_env_var
 
-supabaseUrl: str = os.getenv("SUPABASE_URL", "")
-supabaseKey: str = os.getenv("SUPABASE_KEY", "")
+supabaseUrl: str = get_env_var("SUPABASE_URL")
+supabaseKey: str = get_env_var("SUPABASE_KEY")
 supabaseClient: Client = create_client(supabaseUrl, supabaseKey)
 
 def insert_product(product_id, title, url):

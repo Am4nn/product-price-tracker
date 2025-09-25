@@ -5,28 +5,28 @@ defaults:
 products:
   - id: "fk_16pro_128_natural"
     name: "iPhone 16 Pro 128GB Natural Titanium (Flipkart)"
-    url: "https://www.flipkart.com/apple-iphone-16-pro-natural-titanium-128-gb/p/itm4397c54ec56b7"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-natural-titanium-128-gb/p/itm4397c54ec56b7?pid=MOBH4DQFX4FR2HYZ&lid=LSTMOBH4DQFX4FR2HYZAOPCDX&marketplace=FLIPKART&sattr[]=color&sattr[]=storage&st=color"
     domain: "flipkart"
     target_price: 80000
     notify_if_in_stock: true
     check_price: true
   - id: "fk_16pro_128_black"
     name: "iPhone 16 Pro 128GB Black Titanium (Flipkart)"
-    url: "https://www.flipkart.com/apple-iphone-16-pro-black-titanium-128-gb/p/itm12f97adb4c5ed"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-black-titanium-128-gb/p/itm12f97adb4c5ed?pid=MOBH4DQFVXNS5ZJH&lid=LSTMOBH4DQFVXNS5ZJHBZDANB&marketplace=FLIPKART&sattr[]=color&sattr[]=storage&st=color"
     domain: "flipkart"
     target_price: 80000
     notify_if_in_stock: true
     check_price: true
   - id: "fk_16pro_128_desert"
     name: "iPhone 16 Pro 128GB Desert Titanium (Flipkart)"
-    url: "https://www.flipkart.com/apple-iphone-16-pro-desert-titanium-128-gb/p/itm5a8453e89cbd4"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-desert-titanium-128-gb/p/itm5a8453e89cbd4?pid=MOBH4DQFSDYNVH5U&lid=LSTMOBH4DQFSDYNVH5UFZYHLF&marketplace=FLIPKART&sattr[]=color&sattr[]=storage&st=color"
     domain: "flipkart"
     target_price: 80000
     notify_if_in_stock: true
     check_price: true
   - id: "fk_16pro_128_white"
     name: "iPhone 16 Pro 128GB White Titanium (Flipkart)"
-    url: "https://www.flipkart.com/apple-iphone-16-pro-white-titanium-128-gb/p/itm50f720fdcec51"
+    url: "https://www.flipkart.com/apple-iphone-16-pro-white-titanium-128-gb/p/itm50f720fdcec51?pid=MOBH4JCVQZPCHWJD&lid=LSTMOBH4JCVQZPCHWJDT21P4P&marketplace=FLIPKART&sattr[]=color&sattr[]=storage&st=color"
     domain: "flipkart"
     target_price: 80000
     notify_if_in_stock: true
